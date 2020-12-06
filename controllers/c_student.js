@@ -22,7 +22,7 @@ const postStudent = async (req, res) => {
 
         [err, result] = await to(database.studentModel.findAll({
             where: {
-                username: req.body.username
+                name: req.body.name
             }
         }))
         if (err) {
@@ -37,7 +37,7 @@ const postStudent = async (req, res) => {
             throw new Error(err.message)
         }
         //
-        let student = {username: req.body.username, encryptedPassword: req.body.encryptedPassword};
+        let student = {name: req.body.name, encryptedPassword: req.body.encryptedPassword};
         // const token = jwt.sign(student, process.env.SECRET_KEY, {expiresIn: '50m'})
 
         return res.json({
@@ -69,7 +69,7 @@ const loginStudent = async (req, res) => {
 
         [err, result] = await to(database.studentModel.findAll({
             where: {
-                username: req.body.username
+                libraryId: req.body.libraryId
             }
         }))
         if (err) {
@@ -77,7 +77,7 @@ const loginStudent = async (req, res) => {
         }
 
         if (!result[0]) {
-            throw new Error('no student with this username exists!')
+            throw new Error('no student with this libraryId exists!')
         }
 
         let student = result[0]['dataValues'];
@@ -87,7 +87,7 @@ const loginStudent = async (req, res) => {
             throw new Error(err.message)
         }
         if (result) {
-            student = {username: req.body.username, encryptedPassword: student.encryptedPassword}
+            student = {libraryId: req.body.libraryId, encryptedPassword: student.encryptedPassword}
             // const token = jwt.sign(student, process.env.SECRET_KEY, {expiresIn: '50m'})
             return res.json({
                 'data': {
