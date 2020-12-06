@@ -1,14 +1,8 @@
-const {DataTypes} = require('sequelize')
+const {DataTypes, Sequelize} = require('sequelize')
 
 const {connection} = require('../database/connection')
 
 const dashboardModel = connection.define('dashboard', {
-    id: {
-        type: DataTypes.BIGINT(11),
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true
-    },
     library_id: {
         type: DataTypes.BIGINT(11),
         allowNull: false,
@@ -16,6 +10,7 @@ const dashboardModel = connection.define('dashboard', {
             model: require('./studentModel').studentModel,
             key: 'libraryId'
         },
+        primaryKey: true
     },
     studentName: {
         type: DataTypes.STRING,
@@ -35,6 +30,7 @@ const dashboardModel = connection.define('dashboard', {
     },
     date: {
         type: DataTypes.DATE,
+        defaultValue: Sequelize.NOW,
         allowNull: false,
         notNull: true,
         notEmpty: true
