@@ -13,6 +13,13 @@ const loginStudent = Joi.object({
     password: Joi.required(),
 })
 
+const mealsSelection = Joi.object({
+    breakfast: Joi.boolean().required(),
+    lunch: Joi.boolean().required(),
+    snacks: Joi.boolean().required(),
+    dinner: Joi.boolean().required()
+})
+
 module.exports = {
-    newStudent, loginStudent
+    newStudent, loginStudent, mealsSelection
 }

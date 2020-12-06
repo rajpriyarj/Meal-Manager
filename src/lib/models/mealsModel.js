@@ -30,7 +30,7 @@ const mealsModel = connection.define('meals', {
     },
     dinner: {
         type: DataTypes.BOOLEAN
-    },
+    }
 })
 
 module.exports = {

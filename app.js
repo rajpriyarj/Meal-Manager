@@ -3,11 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
 var app = express();
+require('dotenv').config()
+
+const database = require('./src/lib/database/connection')
+
+var dashboardRouter = require('./routes/dashboard');
+var mealsRouter = require('./routes/meals');
+var studentRouter = require('./routes/student');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,8 +22,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//connect to database
+database.connect();
+
+app.use('/dashboard', dashboardRouter);
+app.use('/meals', mealsRouter);
+app.use('/student', studentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
