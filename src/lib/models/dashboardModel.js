@@ -2,18 +2,37 @@ const {DataTypes} = require('sequelize')
 
 const {connection} = require('../database/connection')
 
-const categoryModel = connection.define('category', {
+const dashboardModel = connection.define('dashboard', {
     id: {
         type: DataTypes.BIGINT(11),
-        autoIncrement: true,
         allowNull: false,
-        primaryKey: true
+        references: {
+            model: require('./studentModel').studentModel,
+            key: 'libraryId'
+        }
     },
-    name: {
+    studentName: {
         type: DataTypes.STRING,
-        notEmpty: true,
-        notNull: true
+        allowNull: false,
+        references: {
+            model: require('./studentModel').studentModel,
+            key: 'name'
+        }
+    },
+    hostelName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        references: {
+            model: require('./studentModel').studentModel,
+            key: 'hostel'
+        }
+    },
+    date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        notNull: true,
+        notEmpty: true
     }
 })
 
-module.exports = {categoryModel: categoryModel}
+module.exports = {dashboardModel}
