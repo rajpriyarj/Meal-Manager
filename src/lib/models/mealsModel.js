@@ -5,9 +5,15 @@ const {connection} = require('../database/connection')
 const mealsModel = connection.define('meals', {
     id: {
         type: DataTypes.BIGINT(11),
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
+    library_id: {
+        type: DataTypes.BIGINT(11),
         allowNull: false,
         references: {
-            model: require('./studentModel').studentModel,
+            model: require('../models/studentModel').studentModel,
             key: 'libraryId'
         }
     },
@@ -15,7 +21,7 @@ const mealsModel = connection.define('meals', {
         type: DataTypes.STRING,
         allowNull: false,
         references: {
-            model: require('./studentModel').studentModel,
+            model: require('../models/studentModel').studentModel,
             key: 'name'
         }
     },

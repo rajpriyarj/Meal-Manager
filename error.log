@@ -1,0 +1,1 @@
+{"message":"Referencing column 'library_id' and referenced column 'libraryId' in foreign key constraint 'dashboards_ibfk_1' are incompatible.","level":"error","service":"user-service"}

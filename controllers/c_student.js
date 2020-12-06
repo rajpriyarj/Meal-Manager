@@ -132,4 +132,4 @@ const generateToken  = (userData) => {
     return token;
 };
 
-module.exports = {postStudent, loginStudent, getStudent, updateAddress, updateCreditCard}
+module.exports = {postStudent, loginStudent}

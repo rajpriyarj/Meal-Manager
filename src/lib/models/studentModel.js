@@ -6,7 +6,8 @@ const studentModel = connection.define('student', {
     libraryId: {
         type: DataTypes.STRING,
         notNull: true,
-        notEmpty: true
+        notEmpty: true,
+        primaryKey: true
     },
     name: {
         type: DataTypes.STRING,

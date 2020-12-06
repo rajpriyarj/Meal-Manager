@@ -5,11 +5,17 @@ const {connection} = require('../database/connection')
 const dashboardModel = connection.define('dashboard', {
     id: {
         type: DataTypes.BIGINT(11),
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
+    library_id: {
+        type: DataTypes.BIGINT(11),
         allowNull: false,
         references: {
             model: require('./studentModel').studentModel,
             key: 'libraryId'
-        }
+        },
     },
     studentName: {
         type: DataTypes.STRING,

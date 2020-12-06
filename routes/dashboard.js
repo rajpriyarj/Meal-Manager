@@ -4,6 +4,6 @@ var router = express.Router();
 const Dashboard = require('../controllers/c_dashboard')
 const {authenticate} = require('../controllers/auth')
 
-router.get('/', authenticate, Dashboard.getdashboard);
+router.get('/', authenticate, Dashboard.getDashboard);
 
-module.exports = router
+module.exports = router;
