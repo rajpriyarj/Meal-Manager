@@ -1,6 +1,6 @@
 const {to} = require('await-to-js')
 
-const database = require('../src/lib/models/dashboardModel')
+const database = require('../src/lib/models/studentModel')
 const logger = require('./../src/lib/logger/winston')
 
 const getDashboard = async (req, res) => {
@@ -8,7 +8,8 @@ const getDashboard = async (req, res) => {
         let err, result
 
         if (req.params.dashboard_id) {
-            [err, result] = await to(database.dashboardModel.findAll({
+            [err, result] = await to(database.studentModel.findAll({
+                attributes: ['libraryId', 'name', 'hostel'],
                 where: {
                     library_id: req.params.dashboard_id
                 }
@@ -25,36 +26,19 @@ const getDashboard = async (req, res) => {
                 'data': result,
                 'error': null
             });
-        } 
-        // else if (req.params.product_id) {
-        //     [err, result] = await to(database.dashboardModel.findAll({
-        //         where: {
-        //             product_id: req.params.product_id
-        //         }
-        //     }))
-        //     if (err) {
-        //         throw new Error(err.message)
-        //     }
-
-        //     if (!result[0]) {
-        //         throw new Error('No dashboard found for this product id !')
-        //     }
-
-        //     return res.json({
-        //         'data': result,
-        //         'error': null
-        //     });
-        // } 
-        // else {
-        //     [err, result] = await to(database.dashboardModel.findAll())
-        //     if (err) {
-        //         throw new Error(err.message)
-        //     }
-        //     return res.json({
-        //         'data': {'Category details': result},
-        //         'error': null
-        //     });
-        // }
+        }
+        else {
+            [err, result] = await to(database.studentModel.findAll({
+                attributes: ['libraryId', 'name', 'hostel']
+            }))
+            if (err) {
+                throw new Error(err.message)
+            }
+            return res.json({
+                'data': {'Student details': result},
+                'error': null
+            });
+        }
     } 
     catch (err) {
         logger.error(err.message)

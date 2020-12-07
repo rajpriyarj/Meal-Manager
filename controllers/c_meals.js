@@ -4,6 +4,52 @@ const database = require('../src/lib/models/mealsModel')
 const logger = require('./../src/lib/logger/winston')
 const mealsValue = require('./../src/lib/Payload/validation')
 
+const getMeals = async (req, res) => {
+    try {
+        let err, result
+
+        if (req.params.dashboard_id) {
+            [err, result] = await to(database.mealsModel.findAll({
+                // attributes: ['breakfast', 'lunch', 'snacks', 'dinner'],
+                where: {
+                    library_id: req.params.meals_id
+                }
+            }))
+            if (err) {
+                throw new Error(err.message)
+            }
+            
+            if (!result[0]) {
+                throw new Error("No student found with this id !")
+            }
+
+            return res.json({
+                'data': result,
+                'error': null
+            });
+        }
+        else {
+            [err, result] = await to(database.mealsModel.findAll())
+            if (err) {
+                throw new Error(err.message)
+            }
+            return res.json({
+                'data': {'Student details': result},
+                'error': null
+            });
+        }
+    } 
+    catch (err) {
+        logger.error(err.message)
+        return {
+            'data': null,
+            'error': {
+                'message': err.message
+            }
+        }
+    }
+}
+
 const postMeals = async (req, res) => {
     try {
         let err, result
@@ -174,6 +220,7 @@ const updateDinner = async (req, res) => {
 }
 
 module.exports = {
+    getMeals,
     postMeals,
     updateBreakfast,
     updateLunch,

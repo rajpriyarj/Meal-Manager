@@ -5,6 +5,10 @@ const Meals = require('../controllers/c_meals')
 const {authenticate} = require('../controllers/auth');
 const auth = require('../controllers/auth');
 
+router.get('/', authenticate, Meals.getMeals);
+
+router.get('/:meals_id', authenticate, Meals.getMeals);
+
 router.post('/', authenticate, Meals.postMeals);
 
 router.put('/breakfast', authenticate, Meals.updateBreakfast);

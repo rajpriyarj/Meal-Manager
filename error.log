@@ -1,3 +1,0 @@
-{"message":"\"libraryId\" is required","level":"error","service":"user-service"}
-{"message":"Invalid Password!","level":"error","service":"user-service"}
-{"message":"no student with this libraryId exists!","level":"error","service":"user-service"}

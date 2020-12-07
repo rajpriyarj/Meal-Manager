@@ -8,13 +8,6 @@
 {"message":"Executing (default): ALTER TABLE `students` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;","level":"info","service":"user-service"}
 {"message":"Executing (default): ALTER TABLE `students` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;","level":"info","service":"user-service"}
 {"message":"Executing (default): SHOW INDEX FROM `students`","level":"info","service":"user-service"}
-{"message":"Executing (default): CREATE TABLE IF NOT EXISTS `dashboards` (`library_id` VARCHAR(255) , `date` DATETIME NOT NULL, `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`library_id`), FOREIGN KEY (`library_id`) REFERENCES `students` (`libraryId`)) ENGINE=InnoDB;","level":"info","service":"user-service"}
-{"message":"Executing (default): SHOW FULL COLUMNS FROM `dashboards`;","level":"info","service":"user-service"}
-{"message":"Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'dashboards' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='MealManager' AND REFERENCED_TABLE_NAME IS NOT NULL;","level":"info","service":"user-service"}
-{"message":"Executing (default): ALTER TABLE `dashboards` CHANGE `date` `date` DATETIME NOT NULL;","level":"info","service":"user-service"}
-{"message":"Executing (default): ALTER TABLE `dashboards` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;","level":"info","service":"user-service"}
-{"message":"Executing (default): ALTER TABLE `dashboards` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;","level":"info","service":"user-service"}
-{"message":"Executing (default): SHOW INDEX FROM `dashboards`","level":"info","service":"user-service"}
 {"message":"Executing (default): CREATE TABLE IF NOT EXISTS `meals` (`library_id` VARCHAR(255) , `breakfast` TINYINT(1), `lunch` TINYINT(1), `snacks` TINYINT(1), `dinner` TINYINT(1), `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`library_id`), FOREIGN KEY (`library_id`) REFERENCES `students` (`libraryId`)) ENGINE=InnoDB;","level":"info","service":"user-service"}
 {"message":"Executing (default): SHOW FULL COLUMNS FROM `meals`;","level":"info","service":"user-service"}
 {"message":"Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'meals' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='MealManager' AND REFERENCED_TABLE_NAME IS NOT NULL;","level":"info","service":"user-service"}
@@ -26,12 +19,3 @@
 {"message":"Executing (default): ALTER TABLE `meals` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;","level":"info","service":"user-service"}
 {"message":"Executing (default): SHOW INDEX FROM `meals`","level":"info","service":"user-service"}
 {"message":"Successfully connected to MySQL server.","level":"info","service":"user-service"}
-{"message":"Executing (default): SELECT `libraryId`, `name`, `email`, `encryptedPassword`, `hostel`, `createdAt`, `updatedAt` FROM `students` AS `student` WHERE `student`.`name` = 'Rajpriya';","level":"info","service":"user-service"}
-{"message":"Executing (default): INSERT INTO `students` (`libraryId`,`name`,`email`,`encryptedPassword`,`hostel`,`createdAt`,`updatedAt`) VALUES (?,?,?,?,?,?,?);","level":"info","service":"user-service"}
-{"message":"\"libraryId\" is required","level":"error","service":"user-service"}
-{"message":"Executing (default): SELECT `libraryId`, `name`, `email`, `encryptedPassword`, `hostel`, `createdAt`, `updatedAt` FROM `students` AS `student` WHERE `student`.`libraryId` = '1721IT1066';","level":"info","service":"user-service"}
-{"message":"Executing (default): SELECT `libraryId`, `name`, `email`, `encryptedPassword`, `hostel`, `createdAt`, `updatedAt` FROM `students` AS `student` WHERE `student`.`libraryId` = '1721IT1066';","level":"info","service":"user-service"}
-{"message":"Invalid Password!","level":"error","service":"user-service"}
-{"message":"Executing (default): SELECT `libraryId`, `name`, `email`, `encryptedPassword`, `hostel`, `createdAt`, `updatedAt` FROM `students` AS `student` WHERE `student`.`libraryId` = '1721IT166';","level":"info","service":"user-service"}
-{"message":"no student with this libraryId exists!","level":"error","service":"user-service"}
-{"message":"Executing (default): SELECT `libraryId`, `name`, `email`, `encryptedPassword`, `hostel`, `createdAt`, `updatedAt` FROM `students` AS `student` WHERE `student`.`libraryId` = '1721IT1066';","level":"info","service":"user-service"}
