@@ -3,18 +3,27 @@ const {DataTypes, Sequelize} = require('sequelize')
 const {connection} = require('../database/connection')
 
 const dashboardModel = connection.define('dashboard', {
+    // id: {
+    //     type: DataTypes.BIGINT(11),
+    //     notNull: true,
+    //     notEmpty: true,
+    //     primaryKey: true,
+    //     autoIncrement: true
+    // },
     library_id: {
-        type: DataTypes.BIGINT(11),
-        allowNull: false,
+        type: DataTypes.STRING,
+        notNull: true,
+        notEmpty: true,
+        primaryKey: true,
         references: {
             model: require('./studentModel').studentModel,
             key: 'libraryId'
-        },
-        primaryKey: true
+        }
     },
     studentName: {
         type: DataTypes.STRING,
-        allowNull: false,
+        notEmpty: true,
+        notNull: true,
         references: {
             model: require('./studentModel').studentModel,
             key: 'name'
@@ -22,7 +31,8 @@ const dashboardModel = connection.define('dashboard', {
     },
     hostelName: {
         type: DataTypes.STRING,
-        allowNull: false,
+        notEmpty: true,
+        notNull: true,
         references: {
             model: require('./studentModel').studentModel,
             key: 'hostel'
@@ -30,7 +40,6 @@ const dashboardModel = connection.define('dashboard', {
     },
     date: {
         type: DataTypes.DATE,
-        defaultValue: Sequelize.NOW,
         allowNull: false,
         notNull: true,
         notEmpty: true

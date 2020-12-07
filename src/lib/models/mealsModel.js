@@ -3,25 +3,22 @@ const {DataTypes} = require('sequelize')
 const {connection} = require('../database/connection')
 
 const mealsModel = connection.define('meals', {
-    id: {
-        type: DataTypes.BIGINT(11),
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true
-    },
     library_id: {
-        type: DataTypes.BIGINT(11),
-        allowNull: false,
+        type: DataTypes.STRING,
+        notNull: true,
+        notEmpty: true,
+        primaryKey: true,
         references: {
-            model: require('../models/studentModel').studentModel,
+            model: require('./studentModel').studentModel,
             key: 'libraryId'
         }
     },
     studentName: {
         type: DataTypes.STRING,
-        allowNull: false,
+        notEmpty: true,
+        notNull: true,
         references: {
-            model: require('../models/studentModel').studentModel,
+            model: require('./studentModel').studentModel,
             key: 'name'
         }
     },
