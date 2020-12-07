@@ -1,1 +1,3 @@
-{"message":"Referencing column 'library_id' and referenced column 'libraryId' in foreign key constraint 'dashboards_ibfk_1' are incompatible.","level":"error","service":"user-service"}
+{"message":"\"libraryId\" is required","level":"error","service":"user-service"}
+{"message":"Invalid Password!","level":"error","service":"user-service"}
+{"message":"no student with this libraryId exists!","level":"error","service":"user-service"}

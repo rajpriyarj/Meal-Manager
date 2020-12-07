@@ -13,15 +13,15 @@ const mealsModel = connection.define('meals', {
             key: 'libraryId'
         }
     },
-    studentName: {
-        type: DataTypes.STRING,
-        notEmpty: true,
-        notNull: true,
-        references: {
-            model: require('./studentModel').studentModel,
-            key: 'name'
-        }
-    },
+    // studentName: {
+    //     type: DataTypes.STRING,
+    //     notEmpty: true,
+    //     notNull: true,
+    //     references: {
+    //         model: require('./studentModel').studentModel,
+    //         key: 'name'
+    //     }
+    // },
     breakfast: {
         type: DataTypes.BOOLEAN
     },

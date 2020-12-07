@@ -12,7 +12,7 @@ const studentModel = connection.define('student', {
     name: {
         type: DataTypes.STRING,
         notEmpty: true,
-        notNull: true
+        notNull: true,
     },
     email: {
         type: DataTypes.STRING,

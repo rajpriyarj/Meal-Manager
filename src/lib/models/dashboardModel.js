@@ -20,24 +20,24 @@ const dashboardModel = connection.define('dashboard', {
             key: 'libraryId'
         }
     },
-    studentName: {
-        type: DataTypes.STRING,
-        notEmpty: true,
-        notNull: true,
-        references: {
-            model: require('./studentModel').studentModel,
-            key: 'name'
-        }
-    },
-    hostelName: {
-        type: DataTypes.STRING,
-        notEmpty: true,
-        notNull: true,
-        references: {
-            model: require('./studentModel').studentModel,
-            key: 'hostel'
-        }
-    },
+    // studentName: {
+    //     type: DataTypes.STRING,
+    //     notEmpty: true,
+    //     notNull: true,
+    //     references: {
+    //         model: require('./studentModel').studentModel,
+    //         key: 'name'
+    //     }
+    // },
+    // hostelName: {
+    //     type: DataTypes.STRING,
+    //     notEmpty: true,
+    //     notNull: true,
+    //     references: {
+    //         model: require('./studentModel').studentModel,
+    //         key: 'hostel'
+    //     }
+    // },
     date: {
         type: DataTypes.DATE,
         allowNull: false,
