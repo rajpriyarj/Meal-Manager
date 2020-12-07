@@ -87,8 +87,9 @@ const loginStudent = async (req, res) => {
             throw new Error(err.message)
         }
         if (result) {
-            student = {libraryId: req.body.libraryId, encryptedPassword: student.encryptedPassword}
+            student = {library_id: req.body.libraryId, encryptedPassword: student.encryptedPassword}
             // const token = jwt.sign(student, process.env.SECRET_KEY, {expiresIn: '50m'})
+            req.user = student
             return res.json({
                 'data': {
                     'message': 'logged in successfully !',

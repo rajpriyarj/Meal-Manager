@@ -8,7 +8,7 @@ const getMeals = async (req, res) => {
     try {
         let err, result
 
-        if (req.params.dashboard_id) {
+        if (req.params.meals_id) {
             [err, result] = await to(database.mealsModel.findAll({
                 // attributes: ['breakfast', 'lunch', 'snacks', 'dinner'],
                 where: {
@@ -59,13 +59,19 @@ const postMeals = async (req, res) => {
             throw new Error(err.message)
         }
 
-        [err, result] = await to(database.mealsModel.create(req.body))
+        let newMeal = {
+            library_id : req.user['library_id'],
+            ...req.body
+        };
+        // console.log(newMeal);
+
+        [err, result] = await to(database.mealsModel.create(newMeal))
         if (err) {
             throw new Error(err.message)
         }
 
         return res.json({
-            'data': {"Success": "Option Added"},
+            'data': {"Success": "Meals Selected"},
             'error': null
         });
     } catch (err) {
