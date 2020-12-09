@@ -88,7 +88,7 @@ const postMeals = async (req, res) => {
 const updateBreakfast = async (req, res) => {
     try {
         let err, result
-        [err, result] = await to(mealsValue.mealsSelection.breakfast.validateAsync(req.body))
+        [err, result] = await to(mealsValue.breakfast.validateAsync(req.body))
         if (err) {
             throw new Error(err.message)
         }
@@ -97,7 +97,7 @@ const updateBreakfast = async (req, res) => {
             breakfast: req.body.breakfast
         }, {
             where: {
-                libraryId: req.user.libraryId
+                library_id: req.user['library_id']
             }
         }))
         if (err) {
@@ -123,7 +123,7 @@ const updateBreakfast = async (req, res) => {
 const updateLunch = async (req, res) => {
     try {
         let err, result
-        [err, result] = await to(mealsValue.mealsSelection.lunch.validateAsync(req.body))
+        [err, result] = await to(mealsValue.lunch.validateAsync(req.body))
         if (err) {
             throw new Error(err.message)
         }
@@ -132,7 +132,7 @@ const updateLunch = async (req, res) => {
             lunch: req.body.lunch
         }, {
             where: {
-                libraryId: req.user.libraryId
+                library_id: req.user['library_id']
             }
         }))
         if (err) {
@@ -158,7 +158,7 @@ const updateLunch = async (req, res) => {
 const updateSnacks = async (req, res) => {
     try {
         let err, result
-        [err, result] = await to(mealsValue.mealsSelection.snacks.validateAsync(req.body))
+        [err, result] = await to(mealsValue.snacks.validateAsync(req.body))
         if (err) {
             throw new Error(err.message)
         }
@@ -167,7 +167,7 @@ const updateSnacks = async (req, res) => {
             snacks: req.body.snacks
         }, {
             where: {
-                libraryId: req.user.libraryId
+                library_id: req.user['library_id']
             }
         }))
         if (err) {
@@ -193,7 +193,7 @@ const updateSnacks = async (req, res) => {
 const updateDinner = async (req, res) => {
     try {
         let err, result
-        [err, result] = await to(mealsValue.mealsSelection.dinner.validateAsync(req.body))
+        [err, result] = await to(mealsValue.dinner.validateAsync(req.body))
         if (err) {
             throw new Error(err.message)
         }
@@ -202,7 +202,7 @@ const updateDinner = async (req, res) => {
             dinner: req.body.dinner
         }, {
             where: {
-                libraryId: req.user.libraryId
+                library_id: req.user['library_id']
             }
         }))
         if (err) {

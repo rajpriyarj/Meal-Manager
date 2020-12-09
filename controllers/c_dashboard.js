@@ -11,7 +11,7 @@ const getDashboard = async (req, res) => {
             [err, result] = await to(database.studentModel.findAll({
                 attributes: ['libraryId', 'name', 'hostel'],
                 where: {
-                    library_id: req.params.dashboard_id
+                    libraryId: req.params.dashboard_id
                 }
             }))
             if (err) {
@@ -23,7 +23,7 @@ const getDashboard = async (req, res) => {
             }
 
             return res.json({
-                'data': result,
+                'data': {'Student details': result},
                 'error': null
             });
         }
