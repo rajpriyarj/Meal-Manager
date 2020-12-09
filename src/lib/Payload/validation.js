@@ -35,6 +35,43 @@ const snacks = Joi.object({
 const dinner = Joi.object({
     dinner: Joi.boolean().required()
 })
+
+const menu = Joi.object({
+    day: Joi.string().required(),
+    breakfast: Joi.string().required(),
+    lunch: Joi.string().required(),
+    snacks: Joi.string().required(),
+    dinner: Joi.string().required()
+
+})
+
+const menuBreakfast = Joi.object({
+    breakfast: Joi.string().required()
+})
+
+const menuLunch = Joi.object({
+    lunch: Joi.string().required()
+})
+
+const menuSnacks = Joi.object({
+    snacks: Joi.string().required()
+})
+
+const menuDinner = Joi.object({
+    dinner: Joi.string().required()
+})
+
 module.exports = {
-    newStudent, loginStudent, mealsSelection, breakfast, lunch, snacks, dinner
+    newStudent, 
+    loginStudent, 
+    mealsSelection, 
+    breakfast, 
+    lunch, 
+    snacks, 
+    dinner, 
+    menu,
+    menuBreakfast, 
+    menuLunch, 
+    menuSnacks, 
+    menuDinner
 }

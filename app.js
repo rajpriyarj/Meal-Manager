@@ -6,6 +6,7 @@ var logger = require('morgan')
 require('dotenv').config()
 const database = require('./src/lib/database/connection')
 
+var menuRouter = require('./routes/menu');
 var dashboardRouter = require('./routes/dashboard');
 var mealsRouter = require('./routes/meals');
 var studentRouter = require('./routes/student');
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //connect to database
 database.connect();
 
+app.use('/menu', menuRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/meals', mealsRouter);
 app.use('/student', studentRouter);

@@ -1,18 +1,18 @@
 const {to} = require('await-to-js')
 
-const database = require('../src/lib/models/mealsModel')
+const database = require('../src/lib/models/menuModel')
 const logger = require('./../src/lib/logger/winston')
-const mealsValue = require('./../src/lib/Payload/validation')
+const menuValue = require('./../src/lib/Payload/validation')
 
-const getMeals = async (req, res) => {
+const getMenu = async (req, res) => {
     try {
         let err, result
 
-        if (req.params.meals_id) {
-            [err, result] = await to(database.mealsModel.findAll({
+        if (req.params.day) {
+            [err, result] = await to(database.menuModel.findAll({
                 // attributes: ['breakfast', 'lunch', 'snacks', 'dinner'],
                 where: {
-                    library_id: req.params.meals_id
+                    day: req.params.day
                 }
             }))
             if (err) {
@@ -20,11 +20,11 @@ const getMeals = async (req, res) => {
             }
             
             if (!result[0]) {
-                throw new Error("No student found with this id !")
+                throw new Error("No day found with this !")
             }
 
             return res.json({
-                'data': result,
+                'data': {'Day': result},
                 'error': null
             });
         }
@@ -34,7 +34,7 @@ const getMeals = async (req, res) => {
                 throw new Error(err.message)
             }
             return res.json({
-                'data': {'Student details': result},
+                'data': {result},
                 'error': null
             });
         }
@@ -50,40 +50,43 @@ const getMeals = async (req, res) => {
     }
 }
 
-const postMeals = async (req, res) => {
+const postMenu = async (req, res) => {
     try {
         let err, result
 
-        [err, result] = await to(mealsValue.mealsSelection.validateAsync(req.body))
+        [err, result] = await to(menuValue.menu.validateAsync(req.body))
         if (err) {
             throw new Error(err.message)
         }
 
-        [err, result] = await to(database.mealsModel.findAll({
+        // let newMeal = {
+        //     library_id : req.user['library_id'],
+        //     ...req.body
+        // };
+        // console.log(newMeal);
+
+        [err, result] = await to(database.menuModel.findAll({
             where: {
-                library_id: req.user['library_id']
+                day: req.body.day
             }
         }))
         if (err) {
             throw new Error(err.message)
         }
         if (result[0]) {
-            throw new Error(' Meal is already selected !')
+            throw new Error(' Menu for this day already exists !')
         }
 
-        let newMeal = {
-            library_id : req.user['library_id'],
-            ...req.body
-        };
-        // console.log(newMeal);
-
-        [err, result] = await to(database.mealsModel.create(newMeal))
+        [err, result] = await to(database.menuModel.create(req.body))
         if (err) {
             throw new Error(err.message)
         }
+        if (result[0]) {
+            throw new Error(' Menu is already available for this day !')
+        }
 
         return res.json({
-            'data': {"Success": "Meals Selected"},
+            'data': {"Success": "Menu Added"},
             'error': null
         });
     } catch (err) {
@@ -100,16 +103,17 @@ const postMeals = async (req, res) => {
 const updateBreakfast = async (req, res) => {
     try {
         let err, result
-        [err, result] = await to(mealsValue.mealsSelection.breakfast.validateAsync(req.body))
+        [err, result] = await to(menuValue.menuBreakfast.validateAsync(req.body))
         if (err) {
             throw new Error(err.message)
         }
 
-        [err, result] = await to(database.mealsModel.update({
+        [err, result] = await to(database.menuModel.update({
             breakfast: req.body.breakfast
         }, {
             where: {
-                libraryId: req.user.libraryId
+                // library_id: req.user['library_id']
+                day: req.params.day
             }
         }))
         if (err) {
@@ -135,16 +139,17 @@ const updateBreakfast = async (req, res) => {
 const updateLunch = async (req, res) => {
     try {
         let err, result
-        [err, result] = await to(mealsValue.mealsSelection.lunch.validateAsync(req.body))
+        [err, result] = await to(menuValue.menuLunch.validateAsync(req.body))
         if (err) {
             throw new Error(err.message)
         }
 
-        [err, result] = await to(database.mealsModel.update({
+        [err, result] = await to(database.menuModel.update({
             lunch: req.body.lunch
         }, {
             where: {
-                libraryId: req.user.libraryId
+                // library_id: req.user['library_id']
+                day: req.params.day
             }
         }))
         if (err) {
@@ -170,16 +175,17 @@ const updateLunch = async (req, res) => {
 const updateSnacks = async (req, res) => {
     try {
         let err, result
-        [err, result] = await to(mealsValue.mealsSelection.snacks.validateAsync(req.body))
+        [err, result] = await to(menuValue.menuSnacks.validateAsync(req.body))
         if (err) {
             throw new Error(err.message)
         }
 
-        [err, result] = await to(database.mealsModel.update({
+        [err, result] = await to(database.menuModel.update({
             snacks: req.body.snacks
         }, {
             where: {
-                libraryId: req.user.libraryId
+                // library_id: req.user['library_id']
+                day: req.params.day
             }
         }))
         if (err) {
@@ -205,16 +211,17 @@ const updateSnacks = async (req, res) => {
 const updateDinner = async (req, res) => {
     try {
         let err, result
-        [err, result] = await to(mealsValue.mealsSelection.dinner.validateAsync(req.body))
+        [err, result] = await to(menuValue.menuSnacks.validateAsync(req.body))
         if (err) {
             throw new Error(err.message)
         }
 
-        [err, result] = await to(database.mealsModel.update({
+        [err, result] = await to(database.menuModel.update({
             dinner: req.body.dinner
         }, {
             where: {
-                libraryId: req.user.libraryId
+                // library_id: req.user['library_id']
+                day: req.params.day
             }
         }))
         if (err) {
@@ -238,8 +245,8 @@ const updateDinner = async (req, res) => {
 }
 
 module.exports = {
-    getMeals,
-    postMeals,
+    getMenu,
+    postMenu,
     updateBreakfast,
     updateLunch,
     updateSnacks,

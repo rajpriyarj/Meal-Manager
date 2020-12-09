@@ -1,1 +1,2 @@
-{"message":"Validation error","level":"error","service":"user-service"}
+{"message":" Menu for this day already exists !","level":"error","service":"user-service"}
+{"message":" Meal is already selected !","level":"error","service":"user-service"}
