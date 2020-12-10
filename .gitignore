@@ -1,3 +1,6 @@
+public
 views
 node_modules
 .env
+error.log
+logs.log
