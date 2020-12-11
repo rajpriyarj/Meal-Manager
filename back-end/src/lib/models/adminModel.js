@@ -3,12 +3,12 @@ const {DataTypes} = require('sequelize')
 const {connection} = require('../database/connection')
 
 const adminModel = connection.define('admin', {
-    id: {
-        type: DataTypes.STRING,
-        autoIncrement:true,
-        notNull: true,
-        notEmpty: true
-    },
+    // id: {
+    //     type: DataTypes.STRING,
+    //     autoIncrement:true,
+    //     notNull: true,
+    //     notEmpty: true
+    // },
     name: {
         type: DataTypes.STRING,
         notEmpty: true,
