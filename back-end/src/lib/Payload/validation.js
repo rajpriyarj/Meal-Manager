@@ -1,5 +1,31 @@
 const Joi = require("joi");
 
+const superAdmin = Joi.object({
+    name: Joi.string().required(),
+    email: Joi.string().email().required(),
+    password: Joi.required(),
+    mobile: Joi.number().required(),
+    college: Joi.string().required()
+})
+
+const superAdminLogin = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.required(),
+})
+
+const admin = Joi.object({
+    name: Joi.string().required(),
+    email: Joi.string().email().required(),
+    password: Joi.required(),
+    mobile: Joi.number().required(),
+    hostel: Joi.string().required()
+})
+
+const adminLogin = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.required(),
+})
+
 const newStudent = Joi.object({
     libraryId: Joi.string().required(),
     name: Joi.string().required(),
@@ -62,6 +88,10 @@ const menuDinner = Joi.object({
 })
 
 module.exports = {
+    superAdmin,
+    superAdminLogin,
+    admin,
+    adminLogin,
     newStudent, 
     loginStudent, 
     mealsSelection, 

@@ -8,10 +8,11 @@ var cors = require('cors');
 require('dotenv').config();
 const database = require('./src/lib/database/connection')
 
-var menuRouter = require('./routes/menu');
 var dashboardRouter = require('./routes/dashboard');
 var mealsRouter = require('./routes/meals');
 var studentRouter = require('./routes/student');
+var superAdminRouter = require('./routes/superAdmin');
+var adminRouter = require('./routes/admin');
 
 var app = express();
 
@@ -29,10 +30,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 //connect to database
 database.connect();
 
-app.use('/menu', menuRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/meals', mealsRouter);
 app.use('/student', studentRouter);
+app.use('/superAdmin', superAdminRouter);
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
