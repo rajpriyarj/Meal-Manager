@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-import SignUp from './Components/SignUp';
+import SignUp from './Components/studentPortal/SignUp';
 
 // class App extends Component {
 //   constructor(props) {
