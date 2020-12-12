@@ -11,9 +11,10 @@ class SignUp extends Component {
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onChangeHostel = this.onChangeHostel.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            library_id: '',
+            libraryId: '',
             name: '',
             email: '',
             password: '',
@@ -22,7 +23,7 @@ class SignUp extends Component {
     }
 
     onChangeLibraryId(e) {
-        this.setState({ library_id: e.target.value })
+        this.setState({ libraryId: e.target.value })
     }
 
     onChangeName(e) {
@@ -42,55 +43,55 @@ class SignUp extends Component {
     }
 
     onSubmit(e) {
-        e.preventDefault()
+        e.preventDefault();
 
-        const studentObject = {
-            library_id: this.state.library_id,
-            name: this.state.name,
-            email: this.state.email,
-            password: this.state.password,
-            hostel: this.state.hostel
-        };
+    const studentObject = {
+        libraryId: this.state.libraryId,
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password,
+        hostel: this.state.hostel
+    };
 
-        axios.post('http://localhost:7000/student/signup', studentObject)
-            .then((res) => {
-                console.log(res.data)
-            }).catch((error) => {
-                console.log(error)
-            });
+    axios.post('http://localhost:7000/student/signup', studentObject)
+        .then((res) => {
+            console.log(res.data);
+        }).catch((error) => {
+            console.log(error);
+        });
 
-        this.setState({ 
-            library_id: '',
-            name: '',
-            email: '',
-            password: '',
-            hostel: ''
-        })
-    }
+    this.setState({ 
+        libraryId: '',
+        name: '',
+        email: '',
+        password: '',
+        hostel: ''
+    })
+}
 
     render() {
         return (
             <div className="wrapper">
-                <form>
+                <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Library Id</label>
-                        <input type="text" className="form-control" />
+                        <input type="text" value={this.state.libraryId} onChange={this.onChangeLibraryId} className="form-control" />
                     </div>
                     <div className="form-group">
                         <label>Name</label>
-                        <input type="text" className="form-control" />
+                        <input type="text" value={this.state.name} onChange={this.onChangeName} className="form-control" />
                     </div>
                     <div className="form-group">
                         <label>Email</label>
-                        <input type="text" className="form-control" />
+                        <input type="text" value={this.state.email} onChange={this.onChangeEmail} className="form-control" />
                     </div>
                     <div className="form-group">
                         <label>Password</label>
-                        <input type="text" className="form-control" />
+                        <input type="text" value={this.state.password} onChange={this.onChangePassword} className="form-control" />
                     </div>
                     <div className="form-group">
                         <label>Hostel</label>
-                        <input type="text" className="form-control" />
+                        <input type="text" value={this.state.hostel} onChange={this.onChangeHostel} className="form-control" />
                     </div>
                     <div className="form-group">
                         <input type="submit" value="Create User" className="btn btn-success btn-block" />
