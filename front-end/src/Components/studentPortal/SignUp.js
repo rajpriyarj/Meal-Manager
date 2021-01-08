@@ -1,105 +1,45 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React from 'react';
 
-class SignUp extends Component {
-
-    constructor(props){
-        super(props)
-
-        this.onChangeLibraryId = this.onChangeLibraryId.bind(this);
-        this.onChangeName = this.onChangeName.bind(this);
-        this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
-        this.onChangeHostel = this.onChangeHostel.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-
-        this.state = {
-            libraryId: '',
-            name: '',
-            email: '',
-            password: '',
-            hostel: ''
-        }
-    }
-
-    onChangeLibraryId(e) {
-        this.setState({ libraryId: e.target.value })
-    }
-
-    onChangeName(e) {
-        this.setState({ name: e.target.value })
-    }
-
-    onChangeEmail(e) {
-        this.setState({ email: e.target.value })
-    }
-
-    onChangePassword(e) {
-        this.setState({ password: e.target.value })
-    }
-
-    onChangeHostel(e) {
-        this.setState({ hostel: e.target.value })
-    }
-
-    onSubmit(e) {
-        e.preventDefault();
-
-    const studentObject = {
-        libraryId: this.state.libraryId,
-        name: this.state.name,
-        email: this.state.email,
-        password: this.state.password,
-        hostel: this.state.hostel
-    };
-
-    axios.post('http://localhost:7000/student/signup', studentObject)
-        .then((res) => {
-            console.log(res.data);
-        }).catch((error) => {
-            console.log(error);
-        });
-
-    this.setState({ 
-        libraryId: '',
-        name: '',
-        email: '',
-        password: '',
-        hostel: ''
-    })
-}
-
-    render() {
-        return (
-            <div className="wrapper">
-                <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <label>Library Id</label>
-                        <input type="text" value={this.state.libraryId} onChange={this.onChangeLibraryId} className="form-control" />
-                    </div>
-                    <div className="form-group">
-                        <label>Name</label>
-                        <input type="text" value={this.state.name} onChange={this.onChangeName} className="form-control" />
-                    </div>
-                    <div className="form-group">
-                        <label>Email</label>
-                        <input type="text" value={this.state.email} onChange={this.onChangeEmail} className="form-control" />
-                    </div>
-                    <div className="form-group">
-                        <label>Password</label>
-                        <input type="text" value={this.state.password} onChange={this.onChangePassword} className="form-control" />
-                    </div>
-                    <div className="form-group">
-                        <label>Hostel</label>
-                        <input type="text" value={this.state.hostel} onChange={this.onChangeHostel} className="form-control" />
-                    </div>
-                    <div className="form-group">
-                        <input type="submit" value="Create User" className="btn btn-success btn-block" />
-                    </div>
-                </form>
-            </div>
-        )
-    }
+function SignUp({ onSignUp }) {
+    return (
+        <form className="form--signin"
+          onSubmit={event => {
+            event.preventDefault()
+            const elements = event.target.elements
+            const email = elements.email.value
+            const firstName = elements.firstName.value
+            const lastName = elements.lastName.value
+            const password = elements.password.value
+            onSignUp({ firstName, lastName, email, password })
+          }}
+        >
+          <div className="form__group">
+            <label className="form__label form__label--padding">
+              {'First Name'}
+              <input type="text" name="firstName" className="form__input" />
+            </label>
+          </div>
+          <div className="form__group">
+            <label className="form__label form__label--padding">
+              {'Last Name'}
+              <input type="text" name="lastName" className="form__input" />
+            </label>
+          </div>
+          <div className="form__group">
+            <label className="form__label form__label--padding">
+              {'Email'}
+              <input type="email" name="email" className="form__input" required />
+            </label>
+          </div>
+          <div className="form__group">
+            <label className="form__label form__label--padding">
+              {'Password'}
+              <input type="password" name="password" className="form__input" required />
+            </label>
+          </div>
+          <button className="button button__form--submit">Sign up</button>
+        </form>
+      )
 }
 
 export default SignUp;
